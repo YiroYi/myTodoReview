@@ -1,6 +1,10 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
+import Input from '../../shared/components/FormElements/Input';
+import Button from '../../shared/components/FormElements/Button';
+
+
 const DUMMY_PLACES = [
   {
     id: 'p1',
@@ -34,11 +38,9 @@ const UpdatePlace = props => {
         </div>
       )
   }
-  return(
-    <div className="center">
-      <h2>UpdatePlace</h2>
-    </div>
-  )
+  return <form action="">
+    <Input></Input>
+  </form>
 
 }
 
