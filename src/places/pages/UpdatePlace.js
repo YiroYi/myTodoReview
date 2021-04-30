@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import Input from '../../shared/components/FormElements/Input';
 import Button from '../../shared/components/FormElements/Button';
-
+import { VALIDATOR_REQUIRE, VALIDATOR_MINLENGTH } from '../../shared/util/validators';
 
 const DUMMY_PLACES = [
   {
@@ -39,7 +39,28 @@ const UpdatePlace = props => {
       )
   }
   return <form action="">
-    <Input></Input>
+    <Input
+      id="title"
+      element="input"
+      type="text"
+      label="Title"
+      validators={[VALIDATOR_REQUIRE()]}
+      errorText="Please enter a valid title"
+      onInput={()=>{}}
+      value={identifiedPlace.title}
+      valid={true}
+    />
+    <Input
+      id="title"
+      element="textArea"
+      label="Description"
+      validators={[VALIDATOR_MINLENGTH()]}
+      errorText="Please enter a valid description min 5 characters"
+      onInput={()=>{}}
+      value={identifiedPlace.description}
+      valid={true}
+    />
+    <Button type="submit" disabled={true}>Update Place</Button>
   </form>
 
 }
