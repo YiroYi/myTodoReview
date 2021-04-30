@@ -28,9 +28,18 @@ const UpdatePlace = props => {
   const identifiedPlace = DUMMY_PLACES.find(p => p.id === placeId);
 
   if(!identifiedPlace) {
-    return <h2>Could not find place</h2>
+    return(
+        <div className="center">
+          <h2>Can't find place</h2>
+        </div>
+      )
   }
-  return <h2>UpdatePlace</h2>
+  return(
+    <div className="center">
+      <h2>UpdatePlace</h2>
+    </div>
+  )
+
 }
 
 export default UpdatePlace;
