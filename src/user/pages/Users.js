@@ -7,6 +7,11 @@ const Users = () => {
       name: 'Yiro',
       image: 'https://source.unsplash.com/random',
       places: 3
+    },
+     { id: 'u2',
+      name: 'Yujin',
+      image: 'https://source.unsplash.com/random',
+      places: 3
     }]
 
     return <UsersList items={USERS}/>;
