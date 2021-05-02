@@ -5,6 +5,8 @@ import Input from '../../shared/components/FormElements/Input';
 import Button from '../../shared/components/FormElements/Button';
 import { VALIDATOR_REQUIRE, VALIDATOR_MINLENGTH } from '../../shared/util/validators';
 
+import './PlaceForm.css';
+
 const DUMMY_PLACES = [
   {
     id: 'p1',
@@ -28,7 +30,7 @@ const DUMMY_PLACES = [
 
 const UpdatePlace = props => {
   const placeId = useParams().placeId;
-
+  console.log(useParams.placeId)
   const identifiedPlace = DUMMY_PLACES.find(p => p.id === placeId);
 
   if(!identifiedPlace) {
@@ -38,7 +40,7 @@ const UpdatePlace = props => {
         </div>
       )
   }
-  return <form action="">
+  return <form className="place-form">
     <Input
       id="title"
       element="input"
