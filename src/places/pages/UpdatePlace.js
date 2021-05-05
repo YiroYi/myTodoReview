@@ -5,6 +5,8 @@ import Input from '../../shared/components/FormElements/Input';
 import Button from '../../shared/components/FormElements/Button';
 import { VALIDATOR_REQUIRE, VALIDATOR_MINLENGTH } from '../../shared/util/validators';
 
+import { useForm } from '../../shared/hooks/form-hook';
+
 import './PlaceForm.css';
 
 const DUMMY_PLACES = [
@@ -30,8 +32,24 @@ const DUMMY_PLACES = [
 
 const UpdatePlace = props => {
   const placeId = useParams().placeId;
-  console.log(useParams.placeId)
   const identifiedPlace = DUMMY_PLACES.find(p => p.id === placeId);
+
+  const [formState, inputHandler] =useForm({
+    title: {
+      value: identifiedPlace.title,
+      isValid: true
+    },
+    description: {
+      value: identifiedPlace.description,
+      isValid: true
+    }
+  },true);
+
+  const placeUpdateSubmitHandler = event => {
+    event.preventDefault();
+    console.log(formState.inputs)
+  }
+
 
   if(!identifiedPlace) {
     return(
@@ -40,7 +58,7 @@ const UpdatePlace = props => {
         </div>
       )
   }
-  return <form className="place-form">
+  return <form className="place-form" onSubmit={placeUpdateSubmitHandler}>
     <Input
       id="title"
       element="input"
@@ -49,8 +67,8 @@ const UpdatePlace = props => {
       validators={[VALIDATOR_REQUIRE()]}
       errorText="Please enter a valid title"
       onInput={()=>{}}
-      value={identifiedPlace.title}
-      valid={true}
+      initialValue={formState.inputs.title.value}
+      intitalValid={formState.inputs.title.isValid}
     />
     <Input
       id="title"
@@ -59,10 +77,10 @@ const UpdatePlace = props => {
       validators={[VALIDATOR_MINLENGTH()]}
       errorText="Please enter a valid description min 5 characters"
       onInput={()=>{}}
-      value={identifiedPlace.description}
-      valid={true}
+      initialValue={formState.inputs.description.value}
+      intitalValid={formState.inputs.description.isValid}
     />
-    <Button type="submit" disabled={true}>Update Place</Button>
+    <Button type="submit" disabled={!formState.isValid}>Update Place</Button>
   </form>
 
 }
