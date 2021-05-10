@@ -26,6 +26,10 @@ const Auth = props => {
     console.log(formState.inputs);
   }
 
+  const switchModeHandler = () => {
+
+  }
+
   return(
     <Card className="authentication">
       <h2>Login Required</h2>
@@ -51,7 +55,7 @@ const Auth = props => {
           onInput={inputHandler}
         />
         <Button type="submit" disabled={!formState.isValid}>LOGIN</Button>
-
+        <Button inverse onClick={switchModeHandler}>SWITCH TO SIGN UP</Button>
       </form>
     </Card>
   );
