@@ -3,7 +3,7 @@ import Card from '../../shared/components/UIElements/Card';
 import Input from '../../shared/components/FormElements/Input';
 import Button from '../../shared/components/FormElements/Button';
 
-import { VALIDATOR_EMAIL, VALIDATOR_MINLENGTH} from '../../shared/util/validators';
+import { VALIDATOR_EMAIL, VALIDATOR_MINLENGTH, VALIDATOR_REQUIRE} from '../../shared/util/validators';
 
 import { useForm } from '../../shared/hooks/form-hook';
 
@@ -12,7 +12,7 @@ import './Auth.css';
 const Auth = props => {
   const [isLoginMode, setIsLoginMode] = useState(true);
 
-  const [formState, inputHandler] = useForm({
+  const [formState, inputHandler, setFormData] = useForm({
     email: {
       value: '',
       isValid: false
@@ -29,6 +29,21 @@ const Auth = props => {
   }
 
   const switchModeHandler = () => {
+    if(!isLoginMode) {
+      setFormData({
+        ...formState.inputs,
+        name: undefined
+      }, formState.inputs.email.isValid && formState.inputs.password.isValid)
+    } else {
+      setFormData({
+        ...formState.inputs,
+        name: {
+          value: '',
+          isValid: false
+
+        }
+      }, false);
+    }
     setIsLoginMode(prevMode => !prevMode)
   }
 
@@ -37,6 +52,17 @@ const Auth = props => {
       <h2>Login Required</h2>
       <hr/>
       <form onSubmit={authSubmitHandler}>
+        {!isLoginMode && (
+          <Input
+            element="input"
+            id="name"
+            type="text"
+            label="Your name"
+            validators={[VALIDATOR_REQUIRE()]}
+            errorText="Please enter a name"
+            onInput={inputHandler}
+          />
+        )}
         <Input
           element="input"
           id="email"
